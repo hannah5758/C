@@ -1,11 +1,17 @@
 #include <stdio.h>
 
+int result = 0;
+
 int plus(int x){
-    int num2, result;
+    int num2;
     printf("얼마를 더하겠습니까?: ");
     scanf("%d", &num2);
     
-    result = x + num2;
+    if (result == 0){
+        result = x;
+    }
+    
+    result = result + num2;
     
     printf("result: %d \n", result);
     
@@ -13,11 +19,15 @@ int plus(int x){
 }
 
 int minus(int x){
-    int num2, result;
+    int num2;
     printf("얼마를 빼겠습니까?: ");
     scanf("%d", &num2);
     
-    result = x - num2;
+    if (result == 0){
+        result = x;
+    }
+    
+    result = result - num2;
     
     printf("result: %d \n", result);
     
@@ -25,11 +35,15 @@ int minus(int x){
 }
 
 int multiple(int x){
-    int num2, result;
+    int num2;
     printf("얼마를 곱하겠습니까?: ");
     scanf("%d", &num2);
     
-    result = x*num2;
+    if (result == 0){
+        result = x;
+    }
+    
+    result = result * num2;
     
     printf("result: %d \n", result);
     
@@ -37,24 +51,34 @@ int multiple(int x){
 }
 
 int divide(int x){
-    int num2, result;
+    int num2;
     printf("얼마로 나누겠습니까?: ");
     scanf("%d", &num2);
     
-    result = x / num2;
+    if (result == 0){
+        result = x;
+    }
+    
+    result = result / num2;
     
     printf("result: %d \n", result);
     
     return result;
 }
 
-int exponent(int x){
-    int num2, result;
+int exponent(int num){
+    int count;
     printf("몇 제곱을 하시겠습니까?: ");
-    scanf("%d", &num2);
+    scanf("%d", &count);
     
-    for (num2;num2==0;num2--){
-        result = x;
+    if (result == 0){
+        result = num;
+    }
+    
+    printf("%d \n", result);
+    for (int i = 0; i < (count-1); i++){
+        result = result * result;
+        printf("%d \n", result);
     }
     
     printf("result: %d \n", result);
@@ -78,7 +102,7 @@ int main(void){
     scanf("%d", &num);
     
     while(1){
-        printf("수행할 연산은 무엇입니까? ");
+        printf("수행할 연산은 무엇입니까? : ");
         scanf("%c", &cal);
         
         if (cal == '+') {
@@ -86,7 +110,12 @@ int main(void){
         }
         
         else if (cal == '-'){
-            minus(num);
+            
+            if (result == 0){
+                result = num;
+            }
+            
+            minus(result);
         }
         
         else if (cal == '*'){
@@ -98,7 +127,14 @@ int main(void){
         }
         
         else if (cal == '^'){
-            exponent(num);
+            result = exponent(num);
+        }
+        
+        else if (cal == 'n'){
+            result = 0;
+            
+            printf("수를 입력해 주세요. ");
+            scanf("%d", &num);
         }
         
         else if (cal == 'c'){
@@ -107,4 +143,3 @@ int main(void){
     }
     return 0;
 }
-
